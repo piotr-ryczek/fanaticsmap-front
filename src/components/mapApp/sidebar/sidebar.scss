@@ -1,0 +1,312 @@
+#sidebar {
+  flex: 0 0 $sidebarSize;
+  background-color: $backgroundColor;
+  padding: 2rem 0px;
+  box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.25);
+  z-index: 4; // before 2
+  position: relative;
+  box-sizing: border-box;
+  transform: translateX(0px);
+
+  transition: transform 0.3s;
+
+  &.opened {
+
+    #sidebar-toggle-overlay {
+      width: 3rem;
+    }
+
+    #scrollbar-toggle {
+      svg {
+        transform: translateX(0px);
+      }
+    }
+  }
+
+  #sidebar-toggle-overlay {
+    position: absolute;
+    width: 5rem;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    z-index: 5;
+    transform: translateX(-50%);
+
+    transition: width 0.3s;
+  }
+
+  #scrollbar-toggle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    width: 3rem;
+    height: 3rem;
+    background: white;
+    border-radius: 100%;
+    box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: left 0.3s;
+
+    svg {
+      transform: translateX(-0.6rem);
+      transition: transform 0.3s;
+    }
+  }
+
+  .track-vertical {
+    right: 12px;
+  }
+
+  .inner {
+    padding: 0px 2rem;
+  }
+
+  .main-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    flex-direction: column;
+
+    img {
+      height: 8rem;
+      margin-bottom: 1rem;
+    }
+
+    .ratings-label {
+      font-size: 0.75em;
+      margin-top: 0.25rem;
+    }
+
+    .ratings-information {
+      font-size: 0.75em;
+      // margin-top: 0.25rem;
+    }
+  }
+
+  .club-link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: none;
+    width: 100%;
+    padding: 0.5rem 0px;
+    position: relative;
+    overflow: hidden;
+
+    &:after {
+      @extend .clipped-hover;
+    }
+
+    &:hover {
+      &:after {
+        opacity: 1;
+        transform: translateX(0px);
+      }
+
+      .tier {
+        background: white;
+      }
+    }
+
+    .logo,
+    .name,
+    .tier {
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo {
+      flex: 0 0 4rem;
+      padding: 0px 0.25rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      box-sizing: border-box;
+      
+      img {
+        max-height: 2.5rem;
+      }
+    }
+
+    .name {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-flow: column;
+      flex-grow: 1;
+      text-align: left;
+      font-weight: 500;
+      font-size: 1em;
+
+      .original {
+        font-size: 1em;
+        color: $textColor;
+      }
+
+      .transliteration {
+        font-size: 0.7em;
+        color: $minorTextColor;
+      }
+    }
+
+    // Currently unused
+    .tier {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.875em;
+      color: $textColor;
+      background: $lightHoverBackground;
+
+      position: absolute;
+      top: 50%;
+      right: 1rem;
+      transform: translateY(-50%);
+
+      transition: background 0.3s;
+    }
+  }
+
+  .match {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: none;
+    width: 100%;
+    padding: 0.5rem 0px;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+
+    &:after {
+      @extend .clipped-hover;
+    }
+
+    &.has-link {
+      cursor: pointer;
+
+      &:hover {
+        &:after {
+          opacity: 1;
+          transform: translateX(0px);
+        }
+  
+        .tier {
+          background: white;
+        }
+      }
+    }
+    
+
+    &.upcoming-match {
+      margin-bottom: 1rem;
+    }
+
+    .logo,
+    .name {
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo {
+      flex: 0 0 4rem;
+      padding: 0px 0.25rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      box-sizing: border-box;
+      
+      img {
+        max-height: 2.5rem;
+      }
+
+      .no-logo {
+        font-size: 30px;
+        font-weight: bold;
+      }
+    }
+
+    .name {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-flow: column;
+      flex-grow: 1;
+      text-align: left;
+      font-weight: 500;
+      font-size: 1em;
+
+      .original {
+        font-size: 1em;
+        color: $textColor;
+      }
+
+      .transliteration {
+        font-size: 0.7em;
+        color: $minorTextColor;
+      }
+    }
+  }
+
+  .relation-clubs {
+    .club {
+      
+    }
+  }
+  
+  #loading-matches {
+    width: 100px;
+    height: 40px;
+    background: url('/assets/loading_horizontal.gif') no-repeat center;
+    background-size: cover;
+    pointer-events: none;
+    display: block;
+    margin: 0px auto;
+  }
+
+  #fanatics-calendar-link {
+    display: block;
+    margin: 0px auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 50%;
+    box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 100%;
+
+    img {
+      display: block;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #sidebar {
+    width: 90%;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    transform: translateX(100%);
+    padding: 1rem 0px;
+
+    &.opened {
+      transform: translateX(0px);
+    }
+
+    .inner {
+      padding: 0px 1rem;
+    }
+  }
+}
